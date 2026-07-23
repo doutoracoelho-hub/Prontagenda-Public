@@ -43,6 +43,12 @@
 
 Built for solo professionals and multi-clinic organizations, it provides multi-company operation, secure multi-user access and role-based permissions.
 
+## Repository notice
+
+ProntAgenda is proprietary software.
+
+This public repository contains product documentation, screenshots and demonstration materials only. The application source code is maintained in a private repository and is not distributed publicly.
+
 ## Main features
 
 | Area | Capabilities |

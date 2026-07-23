@@ -43,6 +43,12 @@ O **ProntAgenda** é uma plataforma completa em nuvem que centraliza os fluxos c
 
 Desenvolvido tanto para profissionais autônomos quanto para organizações com várias clínicas, oferece operação multiempresa, acesso seguro para múltiplos usuários e permissões baseadas em funções.
 
+## Aviso sobre o repositório
+
+O ProntAgenda é um software proprietário.
+
+Este repositório público contém apenas documentação, imagens e materiais de demonstração do produto. O código-fonte da aplicação é mantido em um repositório privado e não é distribuído publicamente.
+
 ## Principais funcionalidades
 
 | Área | Recursos |
