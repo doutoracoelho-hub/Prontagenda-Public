@@ -1,0 +1,35 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+!*.env.example
+credentials.json
+client_secret*.json
+service-account*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.adk/
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs, build output and local data
+*.log
+*.tmp
+*.cache
+build/
+dist/
+data/
+
+# IDE and operating system
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+

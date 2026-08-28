@@ -1,0 +1,24 @@
+substitutions:
+  _IMAGE: southamerica-east1-docker.pkg.dev/prontagenda-agent-hackathon/prontagenda-hackathon/prontagenda-ai:latest
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --file
+      - hackathon/all-things-agentic/Dockerfile
+      - --tag
+      - ${_IMAGE}
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_IMAGE}
+
+images:
+  - ${_IMAGE}
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+

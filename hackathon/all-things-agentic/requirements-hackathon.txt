@@ -1,0 +1,2 @@
+# Dependências exclusivas do deploy do hackathon serão adicionadas aqui.
+# As dependências do agente atual são instaladas separadamente pelo Dockerfile.

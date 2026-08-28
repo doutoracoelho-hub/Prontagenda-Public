@@ -1,207 +1,134 @@
 <div align="center">
-  <img src="docs/assets/prontagenda-banner.png" alt="ProntAgenda — gestão clínica, administrativa e financeira" width="100%">
 
-  <br>
-  <h1>ProntAgenda</h1>
-  <p><strong>Software de gestão em nuvem para dentistas e clínicas odontológicas.</strong></p>
+# Prontagenda AI Agent
 
-  <p><a href="README.md">🇺🇸 English</a> &nbsp;|&nbsp; 🇧🇷 Português</p>
+### Agendamento autônomo para clínicas com Gemini e Google Cloud
 
-  <p>
-    <img src="https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white" alt="PHP 8.x">
-    <img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&logoColor=white" alt="MySQL">
-    <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript ES6">
-    <img src="https://img.shields.io/badge/Licen%C3%A7a-Direitos%20reservados-red" alt="Direitos reservados">
-    <img src="https://img.shields.io/badge/Status-Ativo-success" alt="Ativo">
-  </p>
+**All Things Agentic Hackathon 2026 · Trilha Taskmaster**
 
-  <p>
-    <a href="https://github.com/doutoracoelho-hub/Prontagenda/commits"><img src="https://img.shields.io/github/last-commit/doutoracoelho-hub/Prontagenda" alt="Último commit"></a>
-    <a href="https://github.com/doutoracoelho-hub/Prontagenda"><img src="https://img.shields.io/github/commit-activity/m/doutoracoelho-hub/Prontagenda" alt="Atividade de commits"></a>
-    <a href="https://github.com/doutoracoelho-hub/Prontagenda/issues"><img src="https://img.shields.io/github/issues/doutoracoelho-hub/Prontagenda" alt="Issues abertas"></a>
-    <a href="https://github.com/doutoracoelho-hub/Prontagenda/releases"><img src="https://img.shields.io/github/v/release/doutoracoelho-hub/Prontagenda?display_name=tag&include_prereleases" alt="Última versão"></a>
-    <img src="https://img.shields.io/github/languages/top/doutoracoelho-hub/Prontagenda" alt="Linguagem principal">
-  </p>
+[Prontagenda](https://www.prontagenda.com.br) · [English](README.md)
+
 </div>
 
-## Índice
+## O projeto
 
-- [Sobre](#sobre)
-- [Principais funcionalidades](#principais-funcionalidades)
-- [Demonstração](#demonstração)
-- [Tecnologias](#tecnologias)
-- [Arquitetura](#arquitetura)
-- [Instalação local](#instalação-local)
-- [Segurança](#segurança)
-- [Roadmap](#roadmap)
-- [Autora](#autora)
-- [Licença](#licença)
+O Prontagenda AI Agent adiciona uma camada agêntica controlada a uma plataforma
+real de gestão de clínicas. Pelo WhatsApp, o paciente pode consultar
+profissionais e disponibilidade real, informar preferências, confirmar um
+agendamento ou solicitar atendimento humano.
 
-## Sobre
-
-O **ProntAgenda** é uma plataforma completa em nuvem que centraliza os fluxos clínicos, administrativos e financeiros de dentistas e clínicas odontológicas, permitindo gerenciar toda a jornada do paciente — do agendamento à conclusão do tratamento — em um único sistema.
-
-Desenvolvido tanto para profissionais autônomos quanto para organizações com várias clínicas, oferece operação multiempresa, acesso seguro para múltiplos usuários e permissões baseadas em funções.
-
-## Aviso sobre o repositório
-
-O ProntAgenda é um software proprietário.
-
-Este repositório público contém apenas documentação, imagens e materiais de demonstração do produto. O código-fonte da aplicação é mantido em um repositório privado e não é distribuído publicamente.
-
-## Principais funcionalidades
-
-| Área | Recursos |
-| --- | --- |
-| **Agenda** | Calendário interativo, agendas de vários profissionais, recorrências, rótulos e suporte à recepção |
-| **Pacientes** | Cadastro, anamnese, evoluções clínicas, histórico de consultas, imagens e anexos |
-| **Odontograma** | Mapa interativo, faces dentárias, sincronização com tratamentos e dentições permanente/decídua |
-| **Tratamentos** | Catálogo, orçamentos, procedimentos, histórico de evolução e profissional responsável |
-| **Financeiro** | Contas a receber e pagar, fluxo de caixa, cartões, parcelas, comissões e painéis |
-| **Laboratório** | Fluxo de prótese, ordens de serviço, etapas de entrega e controle de pagamentos |
-| **Estoque** | Produtos, movimentações, consumo de materiais, equipamentos e depreciação |
-| **Documentos** | Receitas, atestados, exames, contratos e documentos personalizados para impressão |
-| **Plataforma** | Multiempresa, perfis de acesso, auditoria, sessões seguras e gestão de assinaturas |
-| **Relatórios** | Relatórios financeiros, histórico de tratamentos, documentos para impressão e painéis |
-
-## Demonstração
-
-Uma demonstração completa do produto será disponibilizada em breve.
-
-A apresentação mostrará:
-
-- Agendamento de consultas
-- Prontuário do paciente
-- Odontograma interativo
-- Gestão financeira
-- Planejamento de tratamentos
-
-<!-- Substitua este bloco por: <img src="docs/assets/prontagenda-demo.gif" alt="Demonstração do ProntAgenda" width="100%"> -->
-
-## Tecnologias
-
-- **Backend:** PHP 8+, PDO, MySQL/MariaDB e APIs em estilo REST
-- **Frontend:** HTML5, CSS3, JavaScript ES6, AJAX e JSON
-- **Bibliotecas:** FullCalendar, Flatpickr e PHPMailer
-- **Integrações:** Google OAuth, Google Contacts API, Mercado Pago e Memed API
+Não é apenas um chatbot. O Gemini escolhe a ação apropriada, o Google ADK chama
+uma ferramenta autorizada e o backend do Prontagenda valida e registra o
+resultado.
 
 ## Arquitetura
 
+![Arquitetura segura do Prontagenda AI Agent](docs/assets/prontagenda-ai-architecture.png)
+
 ```text
-                Navegador
-                    │
-                    ▼
-              public_html/
-                    │
-        ┌───────────┼───────────┐
-        ▼           ▼           ▼
-      Páginas      API     Autenticação
-        │           │           │
-        └───────────┼───────────┘
-                    ▼
-                  src/
-        ┌───────────┼───────────┐
-        ▼           ▼           ▼
-    Configuração   Auth       Helpers
-        │           │           │
-        └───────────┼───────────┘
-                    ▼
-                  MySQL
+Paciente <-> WhatsApp <-> Evolution API <-> roteador PHP do Prontagenda
+                                               |
+                                  Bearer token + contexto assinado
+                                               v
+                              Cloud Run / agente Google ADK
+                                               |
+                                     Vertex AI / Gemini
+                                               |
+                                   ferramentas autorizadas
+                                               v
+                                  APIs PHP do Prontagenda
+                                               |
+                                  regras de negócio + MySQL
+
+Pedido inseguro, ambíguo ou não suportado -> fila de atendimento humano
 ```
 
-As páginas públicas e os clientes JavaScript se comunicam com endpoints PHP em estilo REST. Os módulos compartilhados de autenticação, configuração e helpers centralizam as regras e o acesso ao banco.
+O modelo não possui credenciais do banco e não escolhe `empresa_id`,
+`paciente_id` nem o telefone do remetente. Identidade, autorização e regras de
+negócio permanecem no backend confiável. Consulte [SECURITY.md](SECURITY.md).
 
-## Instalação local
+## Tecnologias Google
 
-### Pré-requisitos
+- Google Agent Development Kit (ADK)
+- Vertex AI
+- Gemini 3.5 Flash-Lite
+- Cloud Run
+- Cloud Build
+- Artifact Registry
+- Secret Manager
 
-- PHP 8.0+
-- MySQL 5.7+, MySQL 8+ ou versão compatível do MariaDB
-- Extensões PHP `pdo_mysql`, `mbstring`, `curl`, `json` e `openssl`
-- Apache, Nginx ou servidor de desenvolvimento do PHP
+## Estrutura pública
 
-### Configuração
+```text
+ai-agent/                       agentes ADK, tools, gateway e testes
+hackathon/all-things-agentic/  Docker, Cloud Build e deploy no Cloud Run
+integration/php/               referência auditável da integração PHP
+docs/assets/                    materiais públicos da apresentação
+```
 
-1. Clone o repositório:
+O núcleo proprietário do Prontagenda e todos os dados de produção ou pacientes
+continuam privados. `integration/php/` é uma extração para avaliação da
+fronteira de segurança, não uma cópia independente do produto completo.
 
-   ```bash
-   git clone https://github.com/doutoracoelho-hub/Prontagenda.git
-   cd Prontagenda
-   ```
+## Executar os testes
 
-2. Crie o banco MySQL e importe a estrutura de banco do projeto.
+É necessário Python 3.11 ou mais recente.
 
-3. Crie o arquivo `src/config/.env`:
+```powershell
+cd ai-agent
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+py -m pip install -r requirements.txt
+py -m unittest discover -s tests -v
+```
 
-   ```env
-   APP_ENV=local
-   APP_DEBUG=true
+Os testes usam valores sintéticos e não precisam de dados de pacientes.
 
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_NAME=prontagenda
-   DB_USER=root
-   DB_PASS=
-   DB_CHARSET=utf8mb4
-   DB_TZ=-03:00
+## Executar o container localmente
 
-   MP_ACCESS_TOKEN=
-   GOOGLE_CLIENT_ID=
-   GOOGLE_CLIENT_SECRET=
-   GOOGLE_OAUTH_BASE_URL=http://localhost:8000
-   GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback.php
-   SMTP_USER=
-   SMTP_PASS=
-   MEMED_API_KEY=
-   MEMED_SECRET_KEY=
-   ```
+Com o Docker Desktop aberto, execute na raiz do repositório:
 
-4. Aponte o document root do servidor para `public_html` ou inicie o servidor de desenvolvimento:
+```powershell
+docker build -f hackathon/all-things-agentic/Dockerfile -t prontagenda-hackathon .
+```
 
-   ```bash
-   php -S localhost:8000 -t public_html
-   ```
+Copie `hackathon/all-things-agentic/cloudrun.env.example` para `local.env`,
+preencha somente valores de teste e execute:
 
-5. Acesse `http://localhost:8000`.
+```powershell
+docker run --rm -p 8080:8080 --env-file local.env prontagenda-hackathon
+Invoke-RestMethod http://localhost:8080/health
+```
 
-> Nunca envie `.env`, dumps de banco, logs, uploads ou credenciais de produção ao repositório. Em produção, use `APP_ENV=production` e `APP_DEBUG=false`.
+O endpoint autenticado é `POST /v1/whatsapp/respond`. Ele exige um Bearer token
+com pelo menos 32 caracteres e um contexto assinado de curta duração emitido
+pelo backend do Prontagenda.
 
-## Segurança
+## Implantar no Google Cloud
 
-- Configuração por variáveis de ambiente
-- Consultas preparadas com PDO
-- Middleware de autenticação e validação de sessão
-- Autorização baseada em funções
-- Isolamento de dados entre empresas
-- Hash seguro de senhas com a API nativa do PHP
-- Tokens CSRF em formulários protegidos
-- Prevenção contra SQL Injection com consultas preparadas
-- Cabeçalhos de segurança e proteção de uploads
+Os arquivos reproduzíveis estão em
+[`hackathon/all-things-agentic`](hackathon/all-things-agentic/README.md). Depois
+de autenticar a CLI e selecionar seu próprio projeto:
 
-Como o ProntAgenda processa dados pessoais e informações de saúde, a implantação em produção deve utilizar HTTPS, backups criptografados, privilégio mínimo no banco, políticas de auditoria e controles compatíveis com a LGPD.
+```powershell
+.\hackathon\all-things-agentic\deploy-cloud-run.ps1
+```
 
-## Roadmap
+Esse comando apenas mostra a configuração. O deploy só acontece ao adicionar
+explicitamente `-Deploy`. Segredos reais devem ficar no Secret Manager e nunca
+no Git.
 
-- [x] Gestão de pacientes e agenda
-- [x] Gestão financeira
-- [x] Odontograma interativo
-- [x] Planejamento de tratamentos
-- [x] Estoque e equipamentos
-- [x] Módulos de ortodontia e laboratório de prótese
-- [x] Integrações Google, Mercado Pago e Memed
-- [ ] Aplicativo móvel
-- [ ] Assistente clínico com inteligência artificial
-- [ ] Portal do paciente
-- [ ] Agendamento online
+## Documentação
 
-## Autora
+- [Implementação do agente e das tools](ai-agent/README.md)
+- [Guia de deploy](hackathon/all-things-agentic/README.md)
+- [Evidências do deploy](hackathon/all-things-agentic/DEPLOYMENT_EVIDENCE.md)
+- [Referência da integração PHP](integration/php/README.md)
+- [Modelo de segurança](SECURITY.md)
 
-**Monica Simões Coelho** — Cirurgiã-dentista e desenvolvedora de software
+## Autora e licença
 
-[github.com/doutoracoelho-hub](https://github.com/doutoracoelho-hub)
+Monica Simões Coelho — cirurgiã-dentista e desenvolvedora de software.
 
-[www.prontagenda.com.br](https://www.prontagenda.com.br)
-
-## Licença
-
-Este projeto é um software proprietário. Todos os direitos são reservados. O código-fonte é disponibilizado somente para fins de portfólio. Uso comercial, redistribuição ou reprodução sem autorização são proibidos.
+Este repositório é compartilhado para avaliação no hackathon e portfólio. O
+Prontagenda continua sendo software proprietário. Consulte [License](License).
