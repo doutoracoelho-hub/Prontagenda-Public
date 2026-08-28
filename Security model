@@ -1,0 +1,415 @@
+Security model
+
+Prontagenda remains responsible for:
+
+authentication;
+authorization;
+business rules;
+validation;
+database access;
+multi-company isolation;
+schedule consistency;
+human escalation.
+
+The agent is responsible for:
+
+understanding natural-language requests;
+determining the next workflow step;
+selecting the appropriate tool;
+generating conversational responses.
+
+This separation prevents the language model from having unrestricted access to application data.
+
+Google technologies
+
+The agentic layer uses:
+
+Gemini 3.5 Flash-Lite
+Vertex AI
+Google Agent Development Kit (ADK)
+Google Cloud Run
+Google Cloud
+
+Supporting technologies include:
+
+PHP 8+
+MySQL / MariaDB
+JavaScript
+AJAX
+JSON
+REST-style APIs
+WhatsApp integration
+Evolution API
+Repository structure
+Prontagenda/
+│
+├── ai-agent/
+│   ├── app/
+│   ├── agent/
+│   ├── tools/
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── README.md
+│
+├── hackathon/
+│   └── all-things-agentic/
+│       ├── architecture/
+│       ├── screenshots/
+│       ├── demo/
+│       └── docs/
+│
+├── public_html/
+│
+├── src/
+│
+├── database/
+│   └── migrations/
+│
+├── tests/
+│   └── security/
+│
+├── docs/
+│
+├── README.md
+├── README.pt-BR.md
+└── .gitignore
+
+The core AI agent implementation is located in:
+
+ai-agent/
+
+Hackathon-specific documentation and evidence are located in:
+
+hackathon/all-things-agentic/
+Agent flow
+
+A typical scheduling request follows this sequence:
+
+WhatsApp message
+      ↓
+Prontagenda PHP
+      ↓
+Signed request to Cloud Run
+      ↓
+Google ADK Agent
+      ↓
+Gemini reasoning
+      ↓
+Secure tool selection
+      ↓
+Prontagenda tool call
+      ↓
+Schedule validation
+      ↓
+MySQL update
+      ↓
+Response to patient
+
+If the workflow cannot safely continue:
+
+Agent / tool failure
+        ↓
+Human intervention required
+        ↓
+Support queue
+Example workflow
+Patient
+
+I would like to schedule an appointment.
+
+Agent
+
+The agent asks which professional the patient would like to see.
+
+Patient
+
+Dr. Monica.
+
+Agent
+
+The agent checks the professional's working hours and real schedule availability.
+
+Patient
+
+I prefer something after 5 PM.
+
+Agent
+
+The agent returns valid available times.
+
+Patient
+
+Tuesday works.
+
+The agent verifies the selected slot, confirms the patient identity, requests any missing information, asks for final confirmation, and creates the appointment.
+
+The appointment then appears in the real Prontagenda schedule.
+
+Google Cloud deployment
+
+The Google ADK agent is deployed on Google Cloud Run.
+
+The deployed service exposes a controlled endpoint used by the Prontagenda backend.
+
+Evidence included in this repository demonstrates:
+
+active Cloud Run deployment;
+service region;
+.run.app deployment;
+health checks;
+real request execution;
+WhatsApp processing requests;
+secure Prontagenda tool calls;
+successful HTTP responses.
+
+See:
+
+hackathon/all-things-agentic/screenshots/
+Local setup
+Requirements
+Python 3.11+
+PHP 8+
+MySQL or MariaDB
+Docker (recommended)
+Google Cloud project
+Vertex AI access
+Google ADK dependencies
+Agent setup
+
+Clone the repository:
+
+git clone https://github.com/doutoracoelho-hub/Prontagenda.git
+cd Prontagenda
+
+Go to the agent directory:
+
+cd ai-agent
+
+Create a Python virtual environment:
+
+python -m venv .venv
+
+Activate it.
+
+Linux / macOS:
+
+source .venv/bin/activate
+
+Windows:
+
+.venv\Scripts\activate
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Create the environment configuration based on the example file:
+
+cp .env.example .env
+
+Configure the required environment variables.
+
+Example:
+
+GOOGLE_CLOUD_PROJECT=
+GOOGLE_CLOUD_LOCATION=
+GOOGLE_GENAI_USE_VERTEXAI=true
+
+PRONTAGENDA_BASE_URL=
+PRONTAGENDA_AGENT_TOKEN=
+PRONTAGENDA_SIGNING_SECRET=
+
+Do not commit real credentials.
+
+Run the agent locally
+
+Example:
+
+python -m app
+
+or, depending on the implementation:
+
+uvicorn app.main:app --host 0.0.0.0 --port 8080
+
+Check the health endpoint:
+
+curl http://localhost:8080/health
+
+Expected result:
+
+{
+  "status": "ok"
+}
+Docker
+
+Build the container:
+
+docker build -t prontagenda-ai-agent .
+
+Run locally:
+
+docker run -p 8080:8080 --env-file .env prontagenda-ai-agent
+Deploy to Cloud Run
+
+Example deployment:
+
+gcloud run deploy prontagenda-ai-hackathon \
+  --source . \
+  --region southamerica-east1 \
+  --platform managed
+
+Production secrets should be provided through secure Google Cloud configuration and must never be committed to the repository.
+
+Prontagenda application setup
+
+The existing Prontagenda platform uses:
+
+PHP 8+
+MySQL / MariaDB
+JavaScript
+AJAX
+JSON APIs
+
+The application backend communicates with the agent through a signed server-to-server request.
+
+The AI model never receives direct database credentials.
+
+Security
+
+Security was a core architectural requirement.
+
+The implementation uses concepts including:
+
+signed request context;
+Bearer-token authentication;
+controlled tool endpoints;
+server-side business-rule validation;
+no direct model-to-database access;
+multi-company isolation;
+human escalation;
+protected environment variables;
+Cloud Run service boundaries;
+application audit logging.
+
+Sensitive data such as credentials, tokens, patient data, production database dumps and private keys are excluded from the repository.
+
+Observability
+
+Cloud Run logs provide visibility into:
+
+application startup;
+health checks;
+agent requests;
+WhatsApp requests;
+tool execution;
+response status;
+execution latency.
+
+This allows the agent workflow to be inspected without exposing unrestricted model access to application data.
+
+Demo
+
+The demo demonstrates:
+
+natural-language scheduling;
+professional selection;
+real schedule availability;
+appointment creation;
+patient identification;
+human escalation;
+background workflows;
+Google Cloud deployment;
+Cloud Run logs;
+secure agent architecture.
+
+Demo video:
+
+ADD_YOUTUBE_LINK_HERE
+
+Architecture diagram
+
+Architecture assets are available in:
+
+hackathon/all-things-agentic/architecture/
+
+The main diagram illustrates:
+
+Patient ↔ WhatsApp ↔ Prontagenda PHP
+                         │
+                         ▼
+              Cloud Run — Google ADK
+                         │
+                         ▼
+             Vertex AI — Gemini
+                         │
+                         ▼
+              Secure Prontagenda Tools
+                         │
+                         ▼
+                  Schedule + MySQL
+
+with human escalation handled separately.
+
+What we learned
+
+The biggest lesson from this project is that an effective AI agent is not defined by how much it talks.
+
+It is defined by what it can safely accomplish.
+
+Building an agent connected to a real application requires more than prompt engineering.
+
+It requires:
+
+authentication;
+authorization;
+tool boundaries;
+deterministic business rules;
+state management;
+error handling;
+observability;
+human escalation.
+
+The project also reinforced the importance of separating model reasoning from direct data access.
+
+Gemini decides what should happen.
+
+Controlled Prontagenda tools determine what is allowed to happen.
+
+Hackathon
+
+This project was submitted to the:
+
+All Things Agentic Hackathon 2026
+
+Category:
+
+Taskmaster
+
+The project demonstrates a complete multi-step workflow rather than a text-only chatbot.
+
+The agent can reason about patient requests, call tools, take real actions, update the scheduling system, work asynchronously, and escalate to human staff when appropriate.
+
+Author
+
+Monica Simões Coelho
+
+Dentist and Software Developer
+
+GitHub:
+
+https://github.com/doutoracoelho-hub
+
+Prontagenda:
+
+https://www.prontagenda.com.br
+
+License
+
+Prontagenda is proprietary software.
+
+All rights reserved.
+
+The repository is shared for evaluation, development, portfolio and hackathon purposes.
+
+Commercial use, redistribution, reproduction or reuse without authorization is prohibited.
+
